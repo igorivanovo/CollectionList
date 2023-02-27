@@ -14,46 +14,58 @@ public class Main {
             String value = scanner.nextLine();
             int val = Integer.parseInt(value);
             if (val == 1) {
-                System.out.println("Какую покупку хотите добавить?");
-                String product = scanner.nextLine();
-                list.add(product);
-                System.out.println("Итого в списке покупок: " + list.size());
+                addProduct(list, scanner);
             }
             if (val == 2) {
-                System.out.println("Список покупок:");
                 shoppingList(list);
             }
             if (val == 3) {
-                System.out.println("Список покупок:");
-                shoppingList(list);
-                System.out.println("Какую хотите удалить? Введите номер или название");
-                try {
-                    int number = scanner.nextInt();
-                    System.out.println("Покупка  <" + list.get(number - 1) + "> удалена, список покупок:");
-                    list.remove(number - 1);
-                    shoppingList(list);
-                } catch (InputMismatchException exception) {
-                    String product = scanner.nextLine();
-                    list.remove(product);
-                    System.out.println("Покупка  <" + product + "> удалена, список покупок:");
-                    shoppingList(list);
-                }
+                deleteProduct(list, scanner);
             }
             if (val == 4) {
-                System.out.println("Введите текст для поиска :");
-                String text = scanner.nextLine();
-                String queryLower = text.toLowerCase();
-                for (int i = 0; i < list.size(); i++) {
-                    String itemLower = list.get(i).toLowerCase();
-                    if (itemLower.contains(queryLower)) {
-                        System.out.println(i + 1 + ".  " + list.get(i));
-                    }
-                }
+                searchProduct(list, scanner);
             }
         }
     }
 
+    private static void searchProduct(List<String> list, Scanner scanner) {
+        System.out.println("Введите текст для поиска :");
+        String text = scanner.nextLine();
+        String queryLower = text.toLowerCase();
+        for (int i = 0; i < list.size(); i++) {
+            String itemLower = list.get(i).toLowerCase();
+            if (itemLower.contains(queryLower)) {
+                System.out.println(i + 1 + ".  " + list.get(i));
+            }
+        }
+    }
+
+    private static void deleteProduct(List<String> list, Scanner scanner) {
+        System.out.println("Список покупок:");
+        shoppingList(list);
+        System.out.println("Какую хотите удалить? Введите номер или название");
+        try {
+            int number = scanner.nextInt();
+            System.out.println("Покупка  <" + list.get(number - 1) + "> удалена, список покупок:");
+            list.remove(number - 1);
+            shoppingList(list);
+        } catch (InputMismatchException exception) {
+            String product = scanner.nextLine();
+            list.remove(product);
+            System.out.println("Покупка  <" + product + "> удалена, список покупок:");
+            shoppingList(list);
+        }
+    }
+
+    private static void addProduct(List<String> list, Scanner scanner) {
+        System.out.println("Какую покупку хотите добавить?");
+        String product = scanner.nextLine();
+        list.add(product);
+        System.out.println("Итого в списке покупок: " + list.size());
+    }
+
     public static void shoppingList(List<String> list) {
+        System.out.println("Список покупок:");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1 + ".  " + list.get(i));
         }
