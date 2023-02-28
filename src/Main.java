@@ -17,6 +17,7 @@ public class Main {
                 addProduct(list, scanner);
             }
             if (val == 2) {
+                System.out.println("Список покупок:");
                 shoppingList(list);
             }
             if (val == 3) {
@@ -65,7 +66,6 @@ public class Main {
     }
 
     public static void shoppingList(List<String> list) {
-        System.out.println("Список покупок:");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1 + ".  " + list.get(i));
         }
